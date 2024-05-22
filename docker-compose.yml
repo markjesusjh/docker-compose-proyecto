@@ -10,7 +10,7 @@
      build: ./api-productos
      image: mark2024/api-productos
      ports:
-       - 8082:8002
+       - 8002:8002
    api-pedidos:
      build: ./api-pedidos
      image: mark2024/api-pedidos
