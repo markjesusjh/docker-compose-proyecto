@@ -12,6 +12,10 @@ class Order(BaseModel):
 
 app = FastAPI()
 
+@app.get("/")
+async def read_root():
+    return {"message": "Service is up and running!"}
+
 @app.get("/orders")
 async def get_orders():
     cursor = conn.cursor()
