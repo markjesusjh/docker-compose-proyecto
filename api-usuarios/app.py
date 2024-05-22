@@ -14,6 +14,10 @@ class User(BaseModel):
 
 app = FastAPI()
 
+@app.get("/")
+async def read_root():
+    return {"message": "Service is up and running!"}
+
 @app.get("/users")
 async def get_users():
     cursor = conn.cursor()
