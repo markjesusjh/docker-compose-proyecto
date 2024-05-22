@@ -12,6 +12,10 @@ class Product(BaseModel):
 
 app = FastAPI()
 
+@app.get("/")
+async def read_root():
+    return {"message": "Service is up and running!"}
+
 @app.get("/products")
 async def get_products():
     cursor = conn.cursor()
