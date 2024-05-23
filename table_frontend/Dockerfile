@@ -25,5 +25,8 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copiar los archivos construidos de la etapa anterior a la carpeta de nginx
 COPY --from=build /app/dist /usr/share/nginx/html
 
+# Exponer el puerto 8000
+EXPOSE 8000
+
 # Comando para iniciar nginx
 CMD ["nginx", "-g", "daemon off;"]

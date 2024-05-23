@@ -1,10 +1,11 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
   server: {
-    port:8000,
+    port: 8000,
     proxy: {
       '/api2': {
         target: 'http://lb-proyecto-866978765.us-east-1.elb.amazonaws.com:8002',
@@ -22,5 +23,8 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api3/, ''),
       }
     },
+  },
+  build: {
+    outDir: 'dist',
   },
 });
