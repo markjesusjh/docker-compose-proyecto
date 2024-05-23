@@ -4,7 +4,7 @@ FROM node:14 AS build
 # Crear y definir el directorio de trabajo
 WORKDIR /app
 
-# Copiar el package.json y el package-lock.json
+# Copiar el package.json y el package-lock.json (si existe)
 COPY package*.json ./
 
 # Instalar las dependencias
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Verificar que la carpeta de build exista
-RUN ls -la /app/build
+RUN ls -la /app/dist
 
 # Etapa 2: Servir la aplicación con nginx
 FROM nginx:alpine
@@ -26,7 +26,7 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copiar los archivos construidos de la etapa anterior a la carpeta de nginx
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Exponer el puerto 80
 EXPOSE 80
