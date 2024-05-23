@@ -1,35 +1,30 @@
-# Utilizar una imagen específica de Node que incluya npm y otras herramientas necesarias
-FROM node:14 AS build
+#choose the proper node image.... https://
+FROM node:18-alpine as build_image
+WORKDIR /app/react-app
 
-# Definir el directorio de trabajo dentro del contenedor
-WORKDIR /app
+#copy package.json
+COPY package.json .
 
-# Copiar únicamente los archivos de descripción de paquetes (package.json y package-lock.json)
-COPY package*.json ./
-
-# Instalar las dependencias
+#install all our packages
 RUN npm install
 
-# Copiar el resto de los archivos del proyecto
-COPY . .
+#copy all our remaining files
+COPY . . 
 
-# Construir la aplicación
-RUN npm run build
+#finally build our project
+RUN npm run build 
 
-# Etapa de producción
-FROM node:14 AS production
+FROM node:18-alpine as PRODUCTION_IMAGE
+WORKDIR /app/react-app
 
-# Definir el directorio de trabajo
-WORKDIR /app
-
-# Copiar los archivos de construcción de la etapa de construcción
-COPY --from=build /app/build ./build
-
-# Instalar solo las dependencias de producción
-RUN npm install --only=production
-
-# Exponer el puerto en el que se ejecutará la aplicación
+#here, we are copying 
+COPY --from=BUILD_IMAGE /app/react-app/dist/ /app/react-app/dist/
 EXPOSE 8000
 
-# Comando para iniciar la aplicación en modo producción
-CMD ["npm", "start"]
+COPY package.json .
+COPY vite.config.ts .
+RUN npm install typescript
+EXPOSE 8000
+CMD ["npm", "run", "preview"]
+
+#i love cloud computing ;)
