@@ -23,7 +23,7 @@ EXPOSE 8000
 
 COPY package.json .
 COPY vite.config.js .
-RUN npm install typescript
+RUN npm install --force typescript
 EXPOSE 8000
 CMD ["npm", "run", "preview"]
 
