@@ -6,7 +6,7 @@ WORKDIR /app/react-app
 COPY package.json .
 
 #install all our packages
-RUN npm install
+RUN npm install --force
 
 #copy all our remaining files
 COPY . . 
