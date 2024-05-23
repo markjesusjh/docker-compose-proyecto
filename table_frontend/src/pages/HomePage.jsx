@@ -6,7 +6,7 @@ const HomePage = () => {
     <div>
       <h1>Bienvenido a la página de inicio del Sistema de Delivery</h1>
       <p>En la barra del menu podras encontrar los micro-servicios</p>
-      <p>En actualizacion ......... 𝙻𝚘𝚊𝚍𝚒𝚗𝚐 
+      <p>"Estas usando la Maquina virtual N°3" En actualizacion ......... 𝙻𝚘𝚊𝚍𝚒𝚗𝚐 
       ↻
      </p>
     </div>
